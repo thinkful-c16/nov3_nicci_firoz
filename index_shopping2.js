@@ -16,43 +16,48 @@ function handleItemSubmit(){
     const entryItem = $('.js-shopping-list-entry').val();
     $('.js-shopping-list-entry').val('');
     handleAddItem(entryItem); 
-    console.log(newItemTemplate(STORE));
+    renderAllListItems(STORE);
 
   }); 
 }
 
+//add item to the STORE array
 function handleAddItem(item){
   STORE.push({name: item, checked: false});
 }
 
-function newItemTemplate(arrStore) {
-  console.log("In new item");
-  console.log(arrStore);
+//call renderListItems 
+function renderAllListItems(arrStore) {
+  //console.log(arrStore);
   
-  const liArray = $(arrStore).map(function(){
-    `
-    <li>
-      <span class="shopping-item">${arrStore.name}</span>
-      <div class="shopping-item-controls">
-        <button class="shopping-item-toggle">
-          <span class="button-label">check</span>
-        </button>
-        <button class="shopping-item-delete">
-         <span class="button-label">delete</span>
-        </button>
-      </div>
-    </li>`;
-
+  const liArray = arrStore.map(function(item, itemIndex){
+    return renderListItem(item);
   })
 
-  return liArray;
+  const liArrayToString = liArray.join("");
+
+  $('.shopping-list').html(liArrayToString);
 }
 
-function renderShoppingList(){
-  
+function renderListItem(item){
+  let checked = item.completed === true ? 'shopping-item__checked' : "";
+ 
+  return `
+  <li>
+    <span class="shopping-item ${checked}">${item.name}</span>
+    <div class="shopping-item-controls">
+      <button class="shopping-item-toggle">
+        <span class="button-label">check</span>
+      </button>
+      <button class="shopping-item-delete">
+       <span class="button-label">delete</span>
+      </button>
+    </div>
+  </li>`;
 }
 
 function main() {
+  renderAllListItems(STORE);
   handleItemSubmit();
   handleCheckedItem();
   handleDeletedItem();
