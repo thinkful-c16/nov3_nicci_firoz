@@ -1,7 +1,7 @@
 'use strict';
 
 const STORE = [
-  {name: "apples", checked: false},
+  {name: "apples", checked: true},
   {name: "oranges", checked: false},
   {name: "milk", checked: true},
   {name: "bread", checked: false}
@@ -61,6 +61,7 @@ function main() {
   handleItemSubmit();
   handleCheckedItem();
   handleDeletedItem();
+  hideCheckedItems();
 }
 
 //marking items as checked/unchecked
@@ -68,7 +69,7 @@ function main() {
 function handleCheckedItem() {
   $('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
     $(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
-    console.log(`hello`);
+    //console.log(`hello`);
   });
 }
 
@@ -77,4 +78,11 @@ function handleDeletedItem() {
   $('.shopping-list').on('click', '.shopping-item-delete', function(event) {
     $(this).closest('li').remove('li');
   });
+}
+
+function hideCheckedItems(){
+  $('.hide-checked-items').on('click', function(){
+    console.log("in checked items");
+    $('.shopping-item__checked').closest("li").hide("li");
+  })
 }
