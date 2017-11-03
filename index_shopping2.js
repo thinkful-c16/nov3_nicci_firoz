@@ -62,6 +62,7 @@ function main() {
   handleCheckedItem();
   handleDeletedItem();
   hideCheckedItems();
+  handleSearchFilter()
 }
 
 //marking items as checked/unchecked
@@ -84,5 +85,15 @@ function hideCheckedItems(){
   $('.hide-checked-items').on('click', function(){
     console.log("in checked items");
     $('.shopping-item__checked').closest("li").hide("li");
+  })
+}
+
+function handleSearchFilter(){
+  $('.js-shopping-list-search').on('keyup', function(event){
+    const searchTerm = $('.js-shopping-list-search').val();
+    const filteredArr = STORE.filter(function(item){
+      return item.name.indexOf(searchTerm) !== -1;
+    })
+    renderAllListItems(filteredArr);
   })
 }
