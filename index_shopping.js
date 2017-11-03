@@ -2,14 +2,19 @@
 
 // adding newly entered item to shopping list
 $(document).ready(function() {
+  main();
+});
+
+function handleItemSubmit(){
   $('#js-shopping-list-form').on('submit', function(event){
     event.preventDefault();
     const entryItem = $('.js-shopping-list-entry').val();
     const newItem = newItemTemplate(entryItem);
-    //console.log(`${newItem}`);
     $('.shopping-list').append(newItem);
-  });
-});
+    $('.js-shopping-list-entry').val('');
+         
+  }); 
+}
 
 function newItemTemplate(entry) {
   return `
@@ -26,17 +31,24 @@ function newItemTemplate(entry) {
 </li>
   `;
 }
-function main() {}
+function main() {
+  handleItemSubmit();
+  handleCheckedItem();
+  handleDeletedItem();
+}
 
 //marking items as checked/unchecked
+
 function handleCheckedItem() {
-  $('.shopping-list').on('click', 'shopping-item-toggle', function(event) {
+  $('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
     $(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
     console.log(`hello`);
   });
 }
 
-handleCheckedItem();
-
-
 //deleting items
+function handleDeletedItem() {
+  $('.shopping-list').on('click', '.shopping-item-delete', function(event) {
+    $(this).closest('li').remove('li');
+  });
+}
