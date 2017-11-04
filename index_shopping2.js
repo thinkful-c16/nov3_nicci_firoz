@@ -1,4 +1,5 @@
 'use strict';
+/*global $*/
 
 const STORE = [
   {name: 'apples', checked: true},
@@ -28,7 +29,7 @@ function handleAddItem(item){
 function renderAllListItems(arrStore) {
   const liArray = arrStore.map(function(item, itemIndex){
     return renderListItem(item);
-  })
+  });
   const liArrayToString = liArray.join('');
   $('.shopping-list').html(liArrayToString);
 }
@@ -50,16 +51,6 @@ function renderListItem(item){
   </li>`;
 }
 
-function main() {
-  renderAllListItems(STORE);
-  handleItemSubmit();
-  handleCheckedItem();
-  handleDeletedItem();
-  hideCheckedItems();
-  handleSearchFilter();
-  hideCheckedItems();
-}
-
 //marking items as checked/unchecked
 
 function handleCheckedItem() {
@@ -68,22 +59,19 @@ function handleCheckedItem() {
     
   });
 }
-
 //deleting items
-function handleDeletedItem() {
-  // $('.shopping-list').on('click', '.shopping-item-delete', function(event) {
-  //   $(this).closest('li').remove('li');
-  // });
+function handleDeleteItemClicked() {
+  $('.shopping-list').on('click', '.shopping-item-delete', function(event) {
+    $(this).closest('li').remove('li');
+  });
 
 }
 //hides/shows checked items
 function hideCheckedItems(){
   $('.hide-checked-items').on('click', function(){
     $('.shopping-item__checked').closest('li').hide();
-    
   });
-  
- // $('.hide-checked-items').off('change', function(){
+  // $('.hide-checked-items').off('change', function(){
   //   $('shopping-item__checked').toggle('shopping-item__checked').show();
   //   console.log(`firing?`);
   // });
@@ -97,4 +85,14 @@ function handleSearchFilter(){
     })
     renderAllListItems(filteredArr);
   })
+}
+
+function main() {
+  renderAllListItems(STORE);
+  handleItemSubmit();
+  handleCheckedItem();
+  handleDeleteItemClicked();
+  hideCheckedItems();
+  handleSearchFilter();
+  hideCheckedItems();
 }
