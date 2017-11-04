@@ -1,15 +1,14 @@
 'use strict';
 
 const STORE = [
-  {name: "apples", checked: true},
-  {name: "oranges", checked: false},
-  {name: "milk", checked: true},
-  {name: "bread", checked: false}
+  {name: 'apples', checked: true},
+  {name: 'oranges', checked: false},
+  {name: 'milk', checked: true},
+  {name: 'bread', checked: false}
 ];
 
-// adding newly entered item to shopping list
 $(main);
-
+// adds newly entered item to shopping list
 function handleItemSubmit(){
   $('#js-shopping-list-form').on('submit', function(event){
     event.preventDefault();
@@ -27,7 +26,6 @@ function handleAddItem(item){
 
 //call renderListItems 
 function renderAllListItems(arrStore) {
-    
   const liArray = arrStore.map(function(item, itemIndex){
     return renderListItem(item);
   })
@@ -39,7 +37,7 @@ function renderListItem(item){
   let checked = item.completed === true ? 'shopping-item__checked' : '';
  
   return `
-  <li>
+  <li class>
     <span class="shopping-item ${checked}">${item.name}</span>
     <div class="shopping-item-controls">
       <button class="shopping-item-toggle">
@@ -58,7 +56,8 @@ function main() {
   handleCheckedItem();
   handleDeletedItem();
   hideCheckedItems();
-  handleSearchFilter()
+  handleSearchFilter();
+  hideCheckedItems();
 }
 
 //marking items as checked/unchecked
@@ -77,13 +76,19 @@ function handleDeletedItem() {
   // });
 
 }
-//hides checked items
+//hides/shows checked items
 function hideCheckedItems(){
-  $('.hide-checked-items').on('change', function(){
-    $('.shopping-item__checked').closest("li").hide("li");
-  })
+  $('.hide-checked-items').on('click', function(){
+    $('.shopping-item__checked').closest('li').hide();
+    
+  });
+  
+ // $('.hide-checked-items').off('change', function(){
+  //   $('shopping-item__checked').toggle('shopping-item__checked').show();
+  //   console.log(`firing?`);
+  // });
 }
-
+//filter items in list by search
 function handleSearchFilter(){
   $('.js-shopping-list-search').on('keyup', function(event){
     const searchTerm = $('.js-shopping-list-search').val();
