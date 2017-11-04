@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    
   }
   
   body {
@@ -9,6 +8,18 @@
   
   button, input[type="text"] {
     padding: 5px;
+  }
+
+  .js-shopping-list-search {
+    margin-top: 5px;
+  }
+  
+  .js-shopping-list-entry {
+    margin-left: 8px;
+  }
+
+  .checkbox-pos{
+    padding-top: 8px;
   }
   
   button:hover {
