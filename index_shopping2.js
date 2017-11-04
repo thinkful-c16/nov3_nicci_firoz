@@ -28,8 +28,7 @@ function handleAddItem(item){
 
 //call renderListItems 
 function renderAllListItems(arrStore) {
-  //console.log(arrStore);
-  
+    
   const liArray = arrStore.map(function(item, itemIndex){
     return renderListItem(item);
   })
@@ -70,20 +69,20 @@ function main() {
 function handleCheckedItem() {
   $('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
     $(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
-    //console.log(`hello`);
+    
   });
 }
 
 //deleting items
 function handleDeletedItem() {
-  $('.shopping-list').on('click', '.shopping-item-delete', function(event) {
-    $(this).closest('li').remove('li');
-  });
+  // $('.shopping-list').on('click', '.shopping-item-delete', function(event) {
+  //   $(this).closest('li').remove('li');
+  // });
+
 }
 
 function hideCheckedItems(){
   $('.hide-checked-items').on('click', function(){
-    console.log("in checked items");
     $('.shopping-item__checked').closest("li").hide("li");
   })
 }
