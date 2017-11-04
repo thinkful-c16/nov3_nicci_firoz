@@ -17,7 +17,6 @@ function handleItemSubmit(){
     $('.js-shopping-list-entry').val('');
     handleAddItem(entryItem); 
     renderAllListItems(STORE);
-
   }); 
 }
 
@@ -32,14 +31,12 @@ function renderAllListItems(arrStore) {
   const liArray = arrStore.map(function(item, itemIndex){
     return renderListItem(item);
   })
-
-  const liArrayToString = liArray.join("");
-
+  const liArrayToString = liArray.join('');
   $('.shopping-list').html(liArrayToString);
 }
 
 function renderListItem(item){
-  let checked = item.completed === true ? 'shopping-item__checked' : "";
+  let checked = item.completed === true ? 'shopping-item__checked' : '';
  
   return `
   <li>
@@ -80,9 +77,9 @@ function handleDeletedItem() {
   // });
 
 }
-
+//hides checked items
 function hideCheckedItems(){
-  $('.hide-checked-items').on('click', function(){
+  $('.hide-checked-items').on('change', function(){
     $('.shopping-item__checked').closest("li").hide("li");
   })
 }
